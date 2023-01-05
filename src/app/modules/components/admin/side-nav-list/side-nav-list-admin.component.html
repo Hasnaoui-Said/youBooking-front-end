@@ -1,0 +1,38 @@
+<mat-nav-list>
+  <div mat-list-item href="#home" (click)="onSidenavClose()">
+    <button mat-icon-button (click)="onSidenavClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <a mat-list-item href="#home" (click)="onSidenavClose()">
+    <mat-icon>home</mat-icon>
+    <span class="nav-caption">Home</span>
+  </a>
+  <a mat-list-item href="#home" (click)="onSidenavClose()">
+    <mat-icon>home</mat-icon>
+    <span class="nav-caption">Hotels</span>
+  </a>
+  <a mat-list-item href="#hhomeome" (click)="onSidenavClose()">
+    <mat-icon>home</mat-icon>
+    <span class="nav-caption">Annances</span>
+  </a>
+  <div mat-list-item>
+    <div fxFlex>
+      <button mat-button (click)="onChangeMode()">
+        <mat-icon>{{mode}}_mode</mat-icon>
+        <span class="nav-caption">Mode</span>
+      </button>
+      <div class="">
+        <mat-form-field appearance="outline">
+          <mat-select [(value)]="lang">
+            <mat-option value="fr" (click)="onChangeLang('fr')">French</mat-option>
+            <mat-option value="en" (click)="onChangeLang('en')">English</mat-option>
+            <mat-option value="ar" (click)="onChangeLang('ar')">Arabic</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+</mat-nav-list>
+

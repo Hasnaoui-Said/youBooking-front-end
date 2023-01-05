@@ -1,0 +1,65 @@
+mat-toolbar{
+  border-radius: 0px;
+}
+
+.navigation-items a{
+  text-decoration: none;
+  color: white;
+  padding: 4px 5px;
+}
+.navigation-items a:hover, .navigation-items a:active{
+  color: lightgray;
+}
+
+.navigation-items {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 10px;
+}
+.lang{
+  font-size: 16px;
+  border-radius: 4px;
+  background: lightgray;
+  color: gray;
+  margin-top: 11px;
+}
+.lang div{
+  width: 120px;
+  height: 42px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+.lang ul{
+  position: absolute;
+  background: white;
+  border-radius: 6px;
+  border: gray 1px solid;
+  width: 130px;
+  top: 55px;
+}
+.lang ul li{
+  position: relative;
+  cursor: pointer;
+  margin: 5px 0 5px -33px;
+  width: 130px;
+}
+.lang ul li a{
+  color: #3f51b5;
+}
+
+
+
+
+@media screen and (max-width: 1140px) {
+  .navigation-items a{
+    padding: 0;
+  }
+  .navigation-items {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 359px) {
+  mat-toolbar{
+    border-radius: 0;
+  }
+}

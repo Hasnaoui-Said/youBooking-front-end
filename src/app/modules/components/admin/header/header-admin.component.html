@@ -1,0 +1,62 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between stretch">
+  <div fxLayoutAlign="start center">
+    <div fxHide.gt-sm>
+      <button mat-icon-button (click)="onToogleSideBar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <a class="text-white nav-item nav-link" href="/home">next.youBooking</a>
+    </div>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md>
+    <ul fxLayoutAlign="space-around center" fxLayoutGap="33px" class="navigation-items">
+
+      <div ngbDropdown class="d-inline-block">
+        <button mat-stroked-button id="dropdownLang" class="bg-white text-dark" ngbDropdownToggle>
+          <span color="primary">{{language.name}}</span>
+          <img
+            class="rounded"
+            [ngClass]="language.lang === 'fr' ? 'mx-1' : 'mx-2'"
+            style="width: 18px; height: 18px"
+            src="{{ language.flag }}"
+            alt="language"
+          />
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownLang">
+          <div class="nav-item nav-link" *ngFor="let l of langs">
+            <div xFlex fxLayout fxLayoutAlign="space-around center"
+                 class="mx-0 my-2"
+                 style="cursor: pointer"
+                 (click)="onChangeLang(l.lang)">
+              <span>{{l.name}}</span>
+              <img
+                class="rounded"
+                style="width: 25px; height: 25px"
+                [src]="l.flag"
+                alt="language">
+            </div>
+          </div>
+        </div>
+      </div>
+      <li>
+        <a routerLink="/admin/home" routerLinkActive="active">Home</a>
+      </li>
+      <li>
+        <a routerLink="/admin/users" routerLinkActive="active">Utilisateurs</a>
+      </li>
+      <li>
+        <a routerLink="/admin/hotels" routerLinkActive="active">Hotels</a>
+      </li>
+      <li>
+        <a routerLink="/admin/annances" routerLinkActive="active">Annances</a>
+      </li>
+      <li>
+        <button mat-button (change)="onChangeMode()">
+          <mat-icon>{{mode}}_mode</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>
+

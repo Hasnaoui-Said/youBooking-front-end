@@ -3,8 +3,8 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import { LoginComponent } from './modules/auth/component/login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {LoginComponent} from './modules/auth/component/login/login.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -13,11 +13,26 @@ import {MatCardModule} from "@angular/material/card";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
-import { NavBarComponent } from './modules/components/nav-bar/nav-bar.component';
+import {NavBarComponent} from './modules/components/nav-bar/nav-bar.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { SignInComponent } from './modules/auth/component/sign-in/sign-in.component';
+import {SignInComponent} from './modules/auth/component/sign-in/sign-in.component';
 import {MatSelectModule} from "@angular/material/select";
+import {HomeAdminComponent} from './modules/components/admin/home/home-admin.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FooterAdminComponent} from './modules/components/admin/footer/footer-admin.component';
+import {SideNavListAdminComponent} from "./modules/components/admin/side-nav-list/side-nav-list-admin.component";
+import {MatListModule} from "@angular/material/list";
+import {HeaderAdminComponent} from './modules/components/admin/header/header-admin.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
+import { NotFoundComponent } from './modules/shared/not-found/not-found.component';
+import { DashboardComponent } from './modules/components/admin/dashboard/dashboard.component';
+import { UserListComponent } from './modules/components/admin/users/user-list/user-list.component';
+import { AdminComponent } from './modules/components/admin/admin.component';
+import { UsersAdminComponent } from './modules/components/admin/users/users-admin.component';
+import { AnnancesAdminComponent } from './modules/components/admin/annances/annances-admin/annances-admin.component';
+import { HotelsComponent } from './modules/components/admin/hotels/hotels.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +40,21 @@ import {MatSelectModule} from "@angular/material/select";
     LoginComponent,
     NavBarComponent,
     SignInComponent,
+    HomeAdminComponent,
+    SideNavListAdminComponent,
+    FooterAdminComponent,
+    HeaderAdminComponent,
+    NotFoundComponent,
+    DashboardComponent,
+    UserListComponent,
+    AdminComponent,
+    UsersAdminComponent,
+    AnnancesAdminComponent,
+    HotelsComponent,
   ],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -40,7 +67,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatIconModule,
     MatMenuModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule,
+    NgbModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
