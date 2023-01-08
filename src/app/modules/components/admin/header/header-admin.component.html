@@ -1,6 +1,6 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-between stretch">
   <div fxLayoutAlign="start center">
-    <div fxHide.gt-sm>
+    <div>
       <button mat-icon-button (click)="onToogleSideBar()">
         <mat-icon>menu</mat-icon>
       </button>
@@ -10,7 +10,7 @@
     </div>
   </div>
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md>
-    <ul fxLayoutAlign="space-around center" fxLayoutGap="33px" class="navigation-items">
+    <ul fxLayoutAlign="space-around center" fxLayoutGap="5px" class="navigation-items">
 
       <div ngbDropdown class="d-inline-block">
         <button mat-stroked-button id="dropdownLang" class="bg-white text-dark" ngbDropdownToggle>
@@ -40,19 +40,11 @@
         </div>
       </div>
       <li>
-        <a routerLink="/admin/home" routerLinkActive="active">Home</a>
-      </li>
-      <li>
-        <a routerLink="/admin/users" routerLinkActive="active">Utilisateurs</a>
-      </li>
-      <li>
-        <a routerLink="/admin/hotels" routerLinkActive="active">Hotels</a>
-      </li>
-      <li>
-        <a routerLink="/admin/annances" routerLinkActive="active">Annances</a>
-      </li>
-      <li>
-        <a routerLink="/admin/notification" routerLinkActive="active" matBadge="1" matBadgeSize="medium" matBadgeColor="accent">Notifications</a>
+        <a routerLink="/admin/notification" routerLinkActive="active">
+          <button mat-button class="text-white" >
+            <mat-icon matBadge="1" matBadgeSize="medium" matBadgeColor="accent">notifications</mat-icon>
+          </button>
+        </a>
       </li>
       <li>
         <button mat-button class="text-white" (change)="onChangeMode()">

@@ -10,7 +10,13 @@
           class="text-gray-400 fs-4 fw-bold mb-10"
           [innerHTML]="Description"
         ></p>
-        <button mat-button mat-flat-button color="primary" (click)="onButtonClick($event)">{{LabelButton}}</button>
+        <app-button
+          [LabelButton]="LabelButton"
+          (click)="onButtonClick($event)"
+          [style]="'m-2 p-2'"
+          [color]="'primary'"
+        >
+        </app-button>
       </div>
       <div class="text-center px-4">
         <img
@@ -20,9 +26,7 @@
           [style.height]="heightImage"
         />
       </div>
-      <!--end::Illustration-->
     </div>
-    <!--end::Card body-->
   </div>
 </ng-template>
 

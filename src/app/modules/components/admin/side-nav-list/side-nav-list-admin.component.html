@@ -1,38 +1,24 @@
-<mat-nav-list>
-  <div mat-list-item href="#home" (click)="onSidenavClose()">
+<mat-nav-list class="px-4">
+  <div mat-list-item class="mb-5" (click)="onSidenavClose()">
     <button mat-icon-button (click)="onSidenavClose()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <a mat-list-item href="#home" (click)="onSidenavClose()">
-    <mat-icon>home</mat-icon>
-    <span class="nav-caption">Home</span>
+  <a class="text-white my-2" mat-list-item routerLink="/admin/home" routerLinkActive="active" (click)="onSidenavClose()">
+    <mat-icon class="mx-2">home</mat-icon>
+    <span class="nav-caption">Dashboard</span>
   </a>
-  <a mat-list-item href="#home" (click)="onSidenavClose()">
-    <mat-icon>home</mat-icon>
+  <a class="text-white my-2" mat-list-item routerLink="/admin/users" routerLinkActive="active" (click)="onSidenavClose()">
+    <mat-icon class="mx-2">group</mat-icon>
+    <span class="nav-caption">users</span>
+  </a>
+  <a class="text-white my-2" mat-list-item  routerLink="/admin/hotels" routerLinkActive="active"  (click)="onSidenavClose()">
+    <mat-icon class="mx-2">hotel</mat-icon>
     <span class="nav-caption">Hotels</span>
   </a>
-  <a mat-list-item href="#hhomeome" (click)="onSidenavClose()">
-    <mat-icon>home</mat-icon>
+  <a class="text-white my-2" mat-list-item  routerLink="/admin/annances" routerLinkActive="active"  (click)="onSidenavClose()">
+    <mat-icon class="mx-2">announcement</mat-icon>
     <span class="nav-caption">Annances</span>
   </a>
-  <div mat-list-item>
-    <div fxFlex>
-      <button mat-button (click)="onChangeMode()">
-        <mat-icon>{{mode}}_mode</mat-icon>
-        <span class="nav-caption">Mode</span>
-      </button>
-      <div class="">
-        <mat-form-field appearance="outline">
-          <mat-select [(value)]="lang">
-            <mat-option value="fr" (click)="onChangeLang('fr')">French</mat-option>
-            <mat-option value="en" (click)="onChangeLang('en')">English</mat-option>
-            <mat-option value="ar" (click)="onChangeLang('ar')">Arabic</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-    </div>
-  </div>
 </mat-nav-list>
 

@@ -42,6 +42,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import { DiagConfirmComponent } from './modules/shared/diag-confirm/diag-confirm.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { ErrorMessageComponent } from './modules/shared/error-message/error-message.component';
+import { ButtonComponent } from './modules/shared/button/button.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ErrorMessageComponent } from './modules/shared/error-message/error-mess
     EmptyListComponent,
     DiagConfirmComponent,
     ErrorMessageComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,

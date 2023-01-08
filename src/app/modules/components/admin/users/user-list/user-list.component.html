@@ -1,14 +1,15 @@
-<app-empty-list *ngIf="usersLength == 0 || loadingData; else data"
+<app-empty-list *ngIf="loadingData || usersLength == 0; else data"
                 [Image]="'../../../../assets/media/svg/misc/users.svg'"
-                [Title]="'La liste des utilisateurs est vide'"
+                [Title]="'No Data From User Found'"
                 [Description]="'Description'"
-                [LabelButton]="'ajouter un utilisateur'"
+                [LabelButton]="'Add New User'"
                 [heightImage]="'240px'"
                 (ButtonClickEvent)="onOpenAddUserDialog()"
 >
 </app-empty-list>
-<ng-template #data>
-  <div class="table-responsive">
+<!--<ng-container *ngTemplateOutlet="data"></ng-container>-->
+<ng-template #data class="mb-5">
+  <div class="table-responsive mb-5">
     <table mat-table
            [dataSource]="dataSource" multiTemplateDataRows
            class="mat-elevation-z8">
@@ -86,3 +87,5 @@
     </table>
   </div>
 </ng-template>
+
+

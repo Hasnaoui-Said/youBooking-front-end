@@ -1,0 +1,16 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(0.25turn, #fc01ff, #915cf0, #8769f9);
+}
+
+main{
+  position: relative;
+  *{
+    position: relative;
+  }
+  margin-bottom: 411px;
+}
+//i want to mke main content allow all espace reste in the page scss
+
