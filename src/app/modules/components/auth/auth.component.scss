@@ -1,0 +1,22 @@
+.auth {
+  width: 100%;
+  height: 100vh;
+  background-image: url("./../../../../assets/img/aa.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  height: 100vh -100px;
+}
+mat-toolbar{
+  background: linear-gradient(0.25turn, #fc01ff, #915cf0, #8769f9);
+}

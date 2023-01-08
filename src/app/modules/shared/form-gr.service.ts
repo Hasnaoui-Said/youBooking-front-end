@@ -26,6 +26,7 @@ export class FormGrService {
       lastName: this.formGroup.control(""),
       cin: this.formGroup.control(""),
       phone: this.formGroup.control(""),
+      confirmPassword: this.formGroup.control(""),
       role: this.formGroup.control("")
     });
     return group;

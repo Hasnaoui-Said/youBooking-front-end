@@ -1,0 +1,15 @@
+
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  {{ data.message }}
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close(false)">Annuler</button>
+  <button mat-button class="badge"
+          [ngClass]="{
+            'text-success bg-light-success': data.state === 'ACTIVATED',
+            'text-danger bg-light-danger': data.state === 'BLOCKED',
+            'text-warning bg-light-warning': data.state === 'PENDING',
+            'text-info bg-light-info': data.state === 'RESTRICTED'
+          }" (click)="dialogRef.close(true)" cdkFocusInitial>{{data.state}}</button>
+</div>

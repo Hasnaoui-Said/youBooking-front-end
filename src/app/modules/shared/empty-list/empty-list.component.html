@@ -1,0 +1,28 @@
+<ng-container *ngTemplateOutlet="ButtonRef">
+</ng-container>
+
+<ng-template #ButtonRef>
+  <div class="card" style="height: auto">
+    <div class="card-body py-5">
+      <div class="card-px text-center py-5 my-2 pb-12">
+        <h2 class="fs-2x fw-bolder mb-10">{{ Title }}</h2>
+        <p
+          class="text-gray-400 fs-4 fw-bold mb-10"
+          [innerHTML]="Description"
+        ></p>
+        <button mat-button mat-flat-button color="primary" (click)="onButtonClick($event)">{{LabelButton}}</button>
+      </div>
+      <div class="text-center px-4">
+        <img
+          class="mw-100 mh-300px"
+          alt=""
+          [src]="Image"
+          [style.height]="heightImage"
+        />
+      </div>
+      <!--end::Illustration-->
+    </div>
+    <!--end::Card body-->
+  </div>
+</ng-template>
+

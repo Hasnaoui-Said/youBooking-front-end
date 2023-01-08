@@ -1,0 +1,48 @@
+<div class="auth" fxLayout="column" fxLayoutAlign="start center">
+  <div class="w-100">
+    <mat-toolbar>
+      <span class="text-white">next.youBookig</span>
+
+      <div fxFlex fxLayout="row" fxLayoutAlign="end" class="mt-2">
+        <ul fxLayoutAlign="space-around center" fxLayoutGap="33px" class="navigation-items">
+
+          <div ngbDropdown class="d-inline-block">
+            <button mat-stroked-button id="dropdownLang" class="bg-white text-dark" ngbDropdownToggle>
+              <span color="primary">{{language.name}}</span>
+              <img
+                class="rounded"
+                [ngClass]="language.lang === 'fr' ? 'mx-1' : 'mx-2'"
+                style="width: 18px; height: 18px"
+                src="{{ language.flag }}"
+                alt="language"
+              />
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownLang">
+              <div class="nav-item nav-link" *ngFor="let l of langs">
+                <div xFlex fxLayout fxLayoutAlign="space-around center"
+                     class="mx-0 my-2"
+                     style="cursor: pointer">
+                  <span>{{l.name}}</span>
+                  <img
+                    class="rounded"
+                    style="width: 25px; height: 25px"
+                    [src]="l.flag"
+                    alt="language">
+                </div>
+              </div>
+            </div>
+          </div>
+          <li class="nav-item nav-link">
+            <button mat-button class="text-white">
+              <mat-icon>{{mode}}_mode</mat-icon>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar>
+  </div>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between stretch">
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between stretch">
   <div fxLayoutAlign="start center">
     <div fxHide.gt-sm>
       <button mat-icon-button (click)="onToogleSideBar()">
@@ -52,7 +52,10 @@
         <a routerLink="/admin/annances" routerLinkActive="active">Annances</a>
       </li>
       <li>
-        <button mat-button (change)="onChangeMode()">
+        <a routerLink="/admin/notification" routerLinkActive="active" matBadge="1" matBadgeSize="medium" matBadgeColor="accent">Notifications</a>
+      </li>
+      <li>
+        <button mat-button class="text-white" (change)="onChangeMode()">
           <mat-icon>{{mode}}_mode</mat-icon>
         </button>
       </li>

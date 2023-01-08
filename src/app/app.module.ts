@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LoginComponent} from './modules/auth/component/login/login.component';
+import {LoginComponent} from './modules/components/auth/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -14,9 +14,9 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {NavBarComponent} from './modules/components/nav-bar/nav-bar.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {SignInComponent} from './modules/auth/component/sign-in/sign-in.component';
+import {SignInComponent} from './modules/components/auth/sign-in/sign-in.component';
 import {MatSelectModule} from "@angular/material/select";
 import {HomeAdminComponent} from './modules/components/admin/home/home-admin.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
@@ -33,6 +33,15 @@ import { AdminComponent } from './modules/components/admin/admin.component';
 import { UsersAdminComponent } from './modules/components/admin/users/users-admin.component';
 import { AnnancesAdminComponent } from './modules/components/admin/annances/annances-admin/annances-admin.component';
 import { HotelsComponent } from './modules/components/admin/hotels/hotels.component';
+import {TokenInterceptorProvider} from "./helpers/token.interceptor";
+import { AuthComponent } from './modules/components/auth/auth.component';
+import {MatBadgeModule} from "@angular/material/badge";
+import { EmptyListComponent } from './modules/shared/empty-list/empty-list.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatDividerModule} from "@angular/material/divider";
+import { DiagConfirmComponent } from './modules/shared/diag-confirm/diag-confirm.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { ErrorMessageComponent } from './modules/shared/error-message/error-message.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +60,10 @@ import { HotelsComponent } from './modules/components/admin/hotels/hotels.compon
     UsersAdminComponent,
     AnnancesAdminComponent,
     HotelsComponent,
+    AuthComponent,
+    EmptyListComponent,
+    DiagConfirmComponent,
+    ErrorMessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,9 +83,14 @@ import { HotelsComponent } from './modules/components/admin/hotels/hotels.compon
     MatSelectModule,
     MatSidenavModule,
     NgbModule,
-    MatListModule
+    MatListModule,
+    MatBadgeModule,
+    MatTableModule,
+    MatDialogModule,
+    MatDividerModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [TokenInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {

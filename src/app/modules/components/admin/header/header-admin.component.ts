@@ -42,6 +42,11 @@ export class HeaderAdminComponent implements OnInit {
   language: LanguageFlag;
   langs: LanguageFlag[] = languages;
   _ngbDropdownMenu: Boolean = false;
+  hidden = false;
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
   ngOnInit(): void {
     this.setLanguage(this.lang);
   }
