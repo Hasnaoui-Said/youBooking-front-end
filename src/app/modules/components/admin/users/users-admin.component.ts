@@ -3,6 +3,7 @@ import {UsersService} from "../../../../services/users/users.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DiagConfirmComponent} from "../../../shared/diag-confirm/diag-confirm.component";
 import {User} from "../../../../models/user.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-users-admin',
@@ -16,6 +17,7 @@ export class UsersAdminComponent implements OnInit {
   loadingData: boolean = true;
 
   constructor(private userService: UsersService,
+              private _snackBar: MatSnackBar,
               private dialog: MatDialog) {
   }
 
@@ -56,8 +58,13 @@ export class UsersAdminComponent implements OnInit {
                   return {...user, accountState: $event.state}
                 return user;
               });
+
+              this.openSnackBar("HttpStatus.Series.SUCCESSFUL: 200", 'X');
+              // let message = '{<span id="client-snackbar">Hello World</span>}';
+              // this.openSnackBar(message, 'X');
             } else {
-              console.warn(next)
+              console.warn(next);
+              this.openSnackBar("HttpStatus.Series.CLIENT_ERROR : 400", 'X');
             }
           },
           error => {
@@ -65,5 +72,8 @@ export class UsersAdminComponent implements OnInit {
           }
         )
     });
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 }

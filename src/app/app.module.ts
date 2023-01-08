@@ -43,6 +43,7 @@ import { DiagConfirmComponent } from './modules/shared/diag-confirm/diag-confirm
 import {MatDialogModule} from "@angular/material/dialog";
 import { ErrorMessageComponent } from './modules/shared/error-message/error-message.component';
 import { ButtonComponent } from './modules/shared/button/button.component';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -87,12 +88,15 @@ import { ButtonComponent } from './modules/shared/button/button.component';
     NgbModule,
     MatListModule,
     MatBadgeModule,
+    MatSnackBarModule,
     MatTableModule,
     MatDialogModule,
     MatDividerModule,
     FormsModule
   ],
-  providers: [TokenInterceptorProvider],
+  providers: [TokenInterceptorProvider,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 6500}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
