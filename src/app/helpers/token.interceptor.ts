@@ -35,10 +35,10 @@ export class TokenInterceptor implements HttpInterceptor {
           if (err.status === 401) {
             this.openSnackBar(`HttpStatus.Series.Unauthorized: 401 ${err.message}`, 'X');
           }
-          if (err.status === 400) {
-            this.openSnackBar(`HttpStatus.Series.CLIENT_ERROR: 400 ${err.message}`, 'X');
-          }
-          return throwError("token has been expired", err.status);
+          // if (err.status === 400) {
+          //   this.openSnackBar(`HttpStatus.Series.CLIENT_ERROR: ${err.message}`, 'X');
+          // }
+          return throwError(err);
         }));
     }
     return next.handle(request);

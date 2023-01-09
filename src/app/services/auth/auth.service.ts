@@ -28,7 +28,7 @@ export class AuthService {
     return this.http.post("http://localhost:9090/login", body, httpOptions);
   }
 
-  sign_in(user: any, role: any) {
+  sign_in(user: any, role: any): Observable<any> {
     const params = new HttpParams().set('role', role);
     return this.http.post(`http://localhost:9090/api/v1/jeton/sign_in`, user, { params });
   }

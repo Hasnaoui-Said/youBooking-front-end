@@ -9,6 +9,15 @@
 </app-empty-list>
 <!--<ng-container *ngTemplateOutlet="data"></ng-container>-->
 <ng-template #data class="mb-5">
+  <div class="test-end">
+    <app-button
+      [LabelButton]="'Add New users'"
+      (click)="onOpenAddUserDialog()"
+      [style]="'m-2 p-2'"
+      [color]="'primary'"
+    >
+    </app-button>
+  </div>
   <div class="table-responsive mb-5">
     <table mat-table
            [dataSource]="dataSource" multiTemplateDataRows
@@ -56,6 +65,31 @@
                 <p><span class="text-primary">First Name :</span> {{element.firstName}}</p>
                 <p><span class="text-primary">Last Name :</span> {{element.firstName}}</p>
               </div>
+              <div class="">roles:[
+                <span *ngFor="let role of element.roles"
+                  class="badge"
+                  [ngClass]="{
+                    'text-success bg-light-success': role.role.name === 'ADMIN',
+                    'text-warning bg-light-warning': role.role.name === 'MANAGER',
+                    'text-info bg-light-info': role.role.name === 'CLIENT'
+                  }"
+                >
+                  {{role.role.name}}
+                </span>]
+              </div>
+              <!--              <div ngbDropdown class="">-->
+              <!--                <button id="roles" class="bg-white text-dark" ngbDropdownToggle>-->
+              <!--                  roles-->
+              <!--                </button>-->
+              <!--                <div ngbDropdownMenu aria-labelledby="roles">-->
+              <!--                  <div class="nav-item nav-link" *ngFor="let role of element.roles">-->
+              <!--                    <div xFlex fxLayout fxLayoutAlign="space-around center"-->
+              <!--                         class="mx-0 my-2">-->
+              <!--                      <span>{{role.name}}</span>-->
+              <!--                    </div>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </div>-->
               <mat-list role="link" fxLayout="row" fxLayoutAlign="space-around center">
                 <mat-list-item role="listitem">
                   <button mat-button class="text-success bg-light-success" *ngIf="element.accountState !== 'ACTIVATED'"
@@ -85,6 +119,10 @@
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
+    <mat-paginator [pageSize]="5" [length]="usersLength"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
   </div>
 </ng-template>
 

@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
-
 interface LanguageFlag {
   lang: string;
   name: string;
@@ -25,12 +24,13 @@ const languages = [
     flag: './assets/images/media/flags/saudi-arabia.svg'
   }
 ];
+
 @Component({
-  selector: 'app-header-admin',
-  templateUrl: './header-admin.component.html',
-  styleUrls: ['./header-admin.component.scss']
+  selector: 'app-header-manager',
+  templateUrl: './header-manager.component.html',
+  styleUrls: ['./header-manager.component.scss']
 })
-export class HeaderAdminComponent implements OnInit {
+export class HeaderManagerComponent implements OnInit {
 
   @Output() sidenavToggle = new EventEmitter();
   @Output() changeMode = new EventEmitter();
@@ -43,13 +43,11 @@ export class HeaderAdminComponent implements OnInit {
   _ngbDropdownMenu: Boolean = false;
   hidden = false;
 
-  toggleBadgeVisibility() {
-    this.hidden = !this.hidden;
-  }
+  constructor() { }
+
   ngOnInit(): void {
     this.setLanguage(this.lang);
   }
-
   setLanguage(lang: String) {
     this.langs.forEach((language: LanguageFlag) => {
       if (language.lang === lang) {
@@ -77,5 +75,4 @@ export class HeaderAdminComponent implements OnInit {
     }
     this.changeLang.emit(lang);
   }
-
 }

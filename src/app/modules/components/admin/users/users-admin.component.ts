@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DiagConfirmComponent} from "../../../shared/diag-confirm/diag-confirm.component";
 import {User} from "../../../../models/user.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {SignUpComponent} from "../../auth/sign-up/sign-up.component";
 
 @Component({
   selector: 'app-users-admin',
@@ -34,7 +35,15 @@ export class UsersAdminComponent implements OnInit {
   }
 
   openAddUserDialog() {
-    console.log("open save new user")
+    console.log("open save new user");
+    // const dialogRef = this.dialog.open(SignUpComponent, {
+    //   width: '600px',
+    //   data: {
+    //     title: "Save new User",
+    //     labelButton: "Add",
+    //     labelButtonCancel: "Add",
+    //   }
+    // });
   }
 
   ChangeStateFromUser($event: any) {
@@ -58,7 +67,6 @@ export class UsersAdminComponent implements OnInit {
                   return {...user, accountState: $event.state}
                 return user;
               });
-
               this.openSnackBar("HttpStatus.Series.SUCCESSFUL: 200", 'X');
               // let message = '{<span id="client-snackbar">Hello World</span>}';
               // this.openSnackBar(message, 'X');

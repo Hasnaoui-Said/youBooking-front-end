@@ -16,7 +16,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {NavBarComponent} from './modules/components/nav-bar/nav-bar.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {SignInComponent} from './modules/components/auth/sign-in/sign-in.component';
+import {SignUpComponent} from './modules/components/auth/sign-up/sign-up.component';
 import {MatSelectModule} from "@angular/material/select";
 import {HomeAdminComponent} from './modules/components/admin/home/home-admin.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
@@ -32,7 +32,7 @@ import { UserListComponent } from './modules/components/admin/users/user-list/us
 import { AdminComponent } from './modules/components/admin/admin.component';
 import { UsersAdminComponent } from './modules/components/admin/users/users-admin.component';
 import { AnnancesAdminComponent } from './modules/components/admin/annances/annances-admin/annances-admin.component';
-import { HotelsComponent } from './modules/components/admin/hotels/hotels.component';
+import { HotelsAdminComponent } from './modules/components/admin/hotels/hotels-admin.component';
 import {TokenInterceptorProvider} from "./helpers/token.interceptor";
 import { AuthComponent } from './modules/components/auth/auth.component';
 import {MatBadgeModule} from "@angular/material/badge";
@@ -44,13 +44,23 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { ErrorMessageComponent } from './modules/shared/error-message/error-message.component';
 import { ButtonComponent } from './modules/shared/button/button.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { ManagerComponent } from './modules/components/manager/manager.component';
+import { NavListManagerComponent } from './modules/components/manager/nav-list/nav-list-manager.component';
+import { ChambersComponent } from './modules/components/manager/chambers/chambers.component';
+import { HeaderManagerComponent } from './modules/components/manager/header/header-manager.component';
+import {FooterManagerComponent} from "./modules/components/manager/footer/footer-manager.component";
+import { DashboardManagerComponent } from './modules/components/manager/dashboard/dashboard-manager.component';
+import { AnnancesManagerComponent } from './modules/components/manager/annances/annances-manager.component';
+import { ReservationsComponent } from './modules/components/manager/reservations/reservations.component';
+import { HotelsManagerComponent } from './modules/components/manager/hotels/hotels-manager.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavBarComponent,
-    SignInComponent,
+    SignUpComponent,
     HomeAdminComponent,
     SideNavListAdminComponent,
     FooterAdminComponent,
@@ -61,12 +71,21 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/materia
     AdminComponent,
     UsersAdminComponent,
     AnnancesAdminComponent,
-    HotelsComponent,
+    HotelsAdminComponent,
     AuthComponent,
     EmptyListComponent,
     DiagConfirmComponent,
     ErrorMessageComponent,
     ButtonComponent,
+    ManagerComponent,
+    FooterManagerComponent,
+    NavListManagerComponent,
+    ChambersComponent,
+    HeaderManagerComponent,
+    DashboardManagerComponent,
+    AnnancesManagerComponent,
+    ReservationsComponent,
+    HotelsManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +111,8 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/materia
     MatTableModule,
     MatDialogModule,
     MatDividerModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule
   ],
   providers: [TokenInterceptorProvider,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 6500}}

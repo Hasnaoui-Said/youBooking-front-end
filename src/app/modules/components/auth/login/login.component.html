@@ -19,8 +19,28 @@
             <input formControlName="password" matInput type="password" required>
           </mat-form-field>
         </div>
+        <div class="row my-2 form-group">
+          <div class="col d-flex justify-content-center">
+            <!-- Checkbox -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+              <label class="form-check-label" for="form2Example31"> Remember me </label>
+            </div>
+          </div>
+
+          <div class="col">
+            <a href="#">Forgot password?</a>
+          </div>
+        </div>
         <div class="form-group mt-4 col-12 text-center">
           <button class="w-100" mat-raised-button color="accent">Login</button>
+        </div>
+        <div class="form-group text-center mt-4">
+          <p>Not a member? <a href="/auth/sign-up">Create new account</a></p>
+          <p>or sign up with:</p>
+          <button type="button" class="btn btn-link btn-floating mx-1">
+            <mat-icon>facebook</mat-icon>
+          </button>
         </div>
       </form>
     </mat-card-content>

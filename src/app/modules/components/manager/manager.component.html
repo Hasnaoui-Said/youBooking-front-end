@@ -1,0 +1,34 @@
+<div class="">
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation">
+      <app-side-nav-list-manager
+        (sidenavClose)="sidenav.close()"
+        (changeMode)="onChangeMode($event)"
+        (changeLang)="changeLang($event)"
+        [lang]="lang"
+        [mode]="mode"
+      >
+      </app-side-nav-list-manager>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-header-manager
+        (sidenavToggle)="sidenav.toggle()"
+        (changeMode)="onChangeMode($event)"
+        (changeLang)="changeLang($event)"
+        [lang]="lang"
+        [mode]="mode"
+      >
+      </app-header-manager>
+      <main class="mx-3 p-4" fxLayout="column" fxLayoutGap="30px">
+
+        <router-outlet></router-outlet>
+
+      </main>
+      <footer class="footer">
+        <mat-toolbar fxLayout="column" fxLayoutAlign="center center">
+          <app-footer-admin></app-footer-admin>
+        </mat-toolbar>
+      </footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
