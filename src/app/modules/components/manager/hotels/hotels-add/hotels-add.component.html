@@ -1,0 +1,192 @@
+<mat-stepper #stepper>
+  <mat-step [stepControl]="hotelFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="hotelFormGroup">
+      <ng-template matStepLabel>Hotel :</ng-template>
+      <div class="mt-2">
+        <div class="card my-4" fxLayout="column" fxLayoutAlign="space-around center">
+          <div class="form-group">
+            <mat-form-field class="w-100">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="name" formControlName="name" required>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Description</mat-label>
+              <textarea matInput placeholder="description" formControlName="description">
+              </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="card my-4" fxLayout="column" fxLayoutAlign="space-around center">
+          <div class="" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>address</mat-label>
+                <input matInput placeholder="address" formControlName="address" required>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>street</mat-label>
+                <input matInput placeholder="street" formControlName="street" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Country</mat-label>
+                <mat-select placeholder="country" formControlName="country" required>
+                  <mat-option *ngFor="let c of country" [value]="c.name">{{c.name}}</mat-option>
+                  <mat-option>Other</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>City</mat-label>
+                <mat-select placeholder="city" formControlName="city" required>
+                  <mat-option *ngFor="let c of city" [value]="c.name">{{c.name}}</mat-option>
+                  <mat-option>Other</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-end mt-2">
+        <button mat-button (click)="dialogRef.close({result: false, data: null})">Cancel</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step >
+    <form [formGroup]="bedRoomFormGroup">
+      <ng-template matStepLabel>Bed Room :</ng-template>
+      <div class="">
+        <div class="mt-2" fxLayout="row" fxLayoutAlign="space-between start">
+          <div class="" fxFlex="40">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Name :</mat-label>
+                <input matInput placeholder="name" formControlName="name"
+                       required>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Number of beds :</mat-label>
+                <input matInput type="number" placeholder="Number of beds" formControlName="numberOfBeds"
+                       required>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Price :</mat-label>
+                <input type="number" matInput placeholder="price" formControlName="price"
+                       required>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>State</mat-label>
+                <mat-select placeholder="typeOfRoom" formControlName="typeOfRoom" required>
+                  <mat-option *ngFor="let c of typeOfBedRoom" [value]="c.uuid">{{c.name}}</mat-option>
+                  <mat-option>Other!</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <button mat-button [disabled]="bedRoomFormGroup.pristine" (click)="bedRoomFormGroup.reset()">Clear
+              </button>
+              <button mat-button color="primary" [disabled]="!bedRoomFormGroup.valid" (click)="addBedRoom()">Save
+              </button>
+            </div>
+          </div>
+          <div fxFlex="60" class="w-100" *ngIf="bedRooms.length>0">
+            list of bed rooms: {{bedRooms.length}}
+            <table mat-table fxFill [dataSource]="bedRooms" class="mat-elevation-z8">
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsBedRoom"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsBedRoom;"></tr>
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> name</th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> price</th>
+                <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="numberOfBeds">
+                <th mat-header-cell *matHeaderCellDef> numberOfBeds</th>
+                <td mat-cell *matCellDef="let element"> {{element.numberOfBeds}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="typeRoom">
+                <th mat-header-cell *matHeaderCellDef> typeRoom</th>
+                <td mat-cell *matCellDef="let element"> {{element.typeRoom.substring(0, 4)}}...</td>
+              </ng-container>
+            </table>
+
+<!--            <div fxLayout class="w-100">-->
+<!--              <div fxFlex="40" class="card" *ngFor="let room of bedRooms">-->
+<!--                <div class="card-body">-->
+<!--                  <h5 class="card-title">{{room.name}}</h5>-->
+<!--                  <p class="card-text">Price: {{room.price}}</p>-->
+<!--                  <p class="card-text">Number of beds: {{room.numberOfBeds}}</p>-->
+<!--                  <p class="card-text">Type of room: {{room.typeRoom}}</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+          </div>
+        </div>
+        <div class="text-end mt-2">
+          <button mat-button (click)="dialogRef.close({result: false, data: null})">Cancel</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="attachmentsFormGroup" errorMessage="Attachments is required.">
+    <form [formGroup]="attachmentsFormGroup">
+      <ng-template matStepLabel>Attachments :</ng-template>
+      <div class="mt-2">
+        <div class="">
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Name :</mat-label>
+              <input matInput placeholder="name" formControlName="title"
+                     required>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>description :</mat-label>
+              <textarea matInput placeholder="description" formControlName="description">
+
+              </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-end mt-2">
+          <button mat-button (click)="dialogRef.close({result: false, data: null})">Cancel</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div class="text-end mt-2">
+      <button mat-button (click)="dialogRef.close({result: false, data: null})">Cancel</button>
+      <button mat-button (click)="saveHotel()">Save</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+

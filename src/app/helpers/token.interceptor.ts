@@ -8,6 +8,7 @@ import {
 import {catchError, Observable, throwError} from 'rxjs';
 import {TokenService} from "../services/token/token.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarService} from "../services/snack-bar.service";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -16,7 +17,7 @@ export class TokenInterceptor implements HttpInterceptor {
   bearer: string = "Bearer ";
 
   constructor(private tokenService: TokenService,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: SnackBarService) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -29,23 +30,19 @@ export class TokenInterceptor implements HttpInterceptor {
         catchError(err => {
           console.log(err);
           if (err.status === 403) {
-            this.openSnackBar("HttpStatus.Series.CLIENT_ERROR: 403 token has been expired", 'X');
+            this._snackBar.open("HttpStatus.Series.CLIENT_ERROR: 403 token has been expired", 'X');
             this.tokenService.clearTokenExpired();
           }
-          if (err.status === 401) {
-            this.openSnackBar(`HttpStatus.Series.Unauthorized: 401 ${err.message}`, 'X');
+          if (err.status === 0) {
+            this._snackBar.open(`${err.message}`, 'X');
           }
-          // if (err.status === 400) {
-          //   this.openSnackBar(`HttpStatus.Series.CLIENT_ERROR: ${err.message}`, 'X');
-          // }
+          if (err.status === 401) {
+            this._snackBar.open(`HttpStatus.Series.Unauthorized: 401 ${err.message}`, 'X');
+          }
           return throwError(err);
         }));
     }
     return next.handle(request);
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
   }
 }
 

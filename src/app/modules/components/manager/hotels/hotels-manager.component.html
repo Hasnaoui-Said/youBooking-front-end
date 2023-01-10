@@ -1,1 +1,29 @@
-<p>hotels-manager works!</p>
+<app-empty-list *ngIf="loadingData || hotelsLength == 0; else data"
+                [Image]="'../../../../assets/media/svg/misc/no_data.svg'"
+                [Title]="'No Data From Hotels Found'"
+                [Description]="'Description'"
+                [LabelButton]="'Add New Hotels'"
+                [heightImage]="'240px'"
+                (ButtonClickEvent)="openAddHotelDialog()"
+>
+</app-empty-list>
+
+<ng-template #data>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Utilisateurs</mat-card-title>
+      <mat-card-subtitle>List</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <app-hotels-manager-list
+          [data]="hotels"
+          [HotelsLength]="hotelsLength"
+          [loadingData]="loadingData"
+          (openAddHotelDialog)="openAddHotelDialog()"
+        >
+        </app-hotels-manager-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

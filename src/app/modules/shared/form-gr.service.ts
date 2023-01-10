@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, Validators} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,43 @@ export class FormGrService {
       phone: this.formGroup.control(""),
       confirmPassword: this.formGroup.control(""),
       role: this.formGroup.control("")
+    });
+    return group;
+  }
+
+  hotelFormGroup() {
+    let group = this.formGroup.group({
+      name: ['', Validators.required],
+      address: ['', Validators.required],
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      description: [''],
+    });
+    return group;
+  }
+
+  bedRoomFormGroup() {
+    let group = this.formGroup.group({
+      name: ['', Validators.required],
+      numberOfBeds: ['', Validators.required],
+      price: ['', Validators.required],
+      typeOfRoom: ['', Validators.required],
+    });
+    return group;
+  }
+
+  bedRoomFormGroups() {
+    let bedRooms: FormArray = this.formGroup.array([this.bedRoomFormGroup(), Validators.required])
+    return this.formGroup.group({
+      bedRooms: bedRooms
+    });
+  }
+
+  attachmentsFormGroup() {
+    let group = this.formGroup.group({
+      title: ['', Validators.required],
+      description: [''],
     });
     return group;
   }

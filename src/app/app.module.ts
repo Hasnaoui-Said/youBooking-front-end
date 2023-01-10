@@ -54,6 +54,10 @@ import { DashboardManagerComponent } from './modules/components/manager/dashboar
 import { AnnancesManagerComponent } from './modules/components/manager/annances/annances-manager.component';
 import { ReservationsComponent } from './modules/components/manager/reservations/reservations.component';
 import { HotelsManagerComponent } from './modules/components/manager/hotels/hotels-manager.component';
+import { HotelsManagerListComponent } from './modules/components/manager/hotels/hotels-list/hotels-manager-list.component';
+import { HotelsAddComponent } from './modules/components/manager/hotels/hotels-add/hotels-add.component';
+import { HotelsEditComponent } from './modules/components/manager/hotels/hotels-edit/hotels-edit.component';
+import {MatStepperModule} from "@angular/material/stepper";
 
 @NgModule({
   declarations: [
@@ -86,34 +90,38 @@ import { HotelsManagerComponent } from './modules/components/manager/hotels/hote
     AnnancesManagerComponent,
     ReservationsComponent,
     HotelsManagerComponent,
+    HotelsManagerListComponent,
+    HotelsAddComponent,
+    HotelsEditComponent,
   ],
-  imports: [
-    BrowserModule,
-    FlexLayoutModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatSidenavModule,
-    NgbModule,
-    MatListModule,
-    MatBadgeModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatDialogModule,
-    MatDividerModule,
-    FormsModule,
-    MatPaginatorModule
-  ],
+    imports: [
+        BrowserModule,
+        FlexLayoutModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSlideToggleModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatMenuModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatSidenavModule,
+        NgbModule,
+        MatListModule,
+        MatBadgeModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatDialogModule,
+        MatDividerModule,
+        FormsModule,
+        MatPaginatorModule,
+        MatStepperModule
+    ],
   providers: [TokenInterceptorProvider,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 6500}}
   ],
