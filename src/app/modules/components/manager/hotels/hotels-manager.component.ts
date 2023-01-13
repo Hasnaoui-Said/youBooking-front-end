@@ -5,6 +5,8 @@ import {HotelsAddComponent} from "./hotels-add/hotels-add.component";
 import {FormArray, FormGroup} from "@angular/forms";
 import {FormGrService} from "../../../shared/form-gr.service";
 import {SnackBarService} from "../../../../services/snack-bar.service";
+import {HttpHeaders} from "@angular/common/http";
+import {AttachmentService} from "../../../../services/attachment/attachment.service";
 
 @Component({
   selector: 'app-hotels-manager',
@@ -19,6 +21,7 @@ export class HotelsManagerComponent implements OnInit {
   constructor(private hotelsService: HotelsService,
               private formGrService: FormGrService,
               private _snackBar: SnackBarService,
+              private attachmentService: AttachmentService,
               public dialog: MatDialog) {
   }
 
@@ -28,33 +31,34 @@ export class HotelsManagerComponent implements OnInit {
 
   openAddHotelDialog() {
 
-    const dialogRef = this.dialog.open(HotelsAddComponent,{
+    const dialogRef = this.dialog.open(HotelsAddComponent, {
       disableClose: true,
       width: '70%',
-        data: {
-          hotelFormGroup: this.formGrService.hotelFormGroup(),
-          bedRoomFormGroup: this.formGrService.bedRoomFormGroup(),
-          bedRoomFormGroups: this.formGrService.bedRoomFormGroups(),
-          attachmentsFormGroup: this.formGrService.attachmentsFormGroup(),
-        }
+      data: {
+        hotelFormGroup: this.formGrService.hotelFormGroup(),
+        bedRoomFormGroup: this.formGrService.bedRoomFormGroup(),
+        bedRoomFormGroups: this.formGrService.bedRoomFormGroups(),
+        attachmentsFormGroup: this.formGrService.attachmentsFormGroup(),
+      }
     });
 
     dialogRef.afterClosed().subscribe(e => {
-      console.log("afterClosed")
-      console.log(e)
-      console.log(e.data)
-      if (e.result != false){
+      if (e.result != false) {
         this.hotelsService.saveHotel(e.data).subscribe(
-          next=>{
+          next => {
             console.log(next)
-          },error=>{
+            this.saveAttachment(next.data.attachments[0].uuid, e.file_store);
+            this.hotels.add(next.data);
+            this.hotelsLength += 1;
+          }, error => {
             console.error(error)
-            this._snackBar.open("errERTY", 'X');
+            this._snackBar.open(error.error.message, 'X');
           }
         )
       }
     });
   }
+
 
   getHotels() {
     this.hotelsService.get().subscribe(
@@ -69,5 +73,23 @@ export class HotelsManagerComponent implements OnInit {
         }
       }
     );
+  }
+
+  private saveAttachment(uuid: any, file_store: any) {
+    this.attachmentService.saveAttachment(uuid, file_store).subscribe(
+      response => {
+        console.log(response)
+        this.hotels.forEach((hotel: any)=>{
+          if (hotel.attachments[0].uuid == uuid){
+            hotel.attachments.add(response.data);
+          }
+        })
+      }, errors => {
+        console.log("error", errors)
+        if (errors.status === 400) {
+          this._snackBar.open(`${errors.error.message}`, 'X');
+        }
+      }
+    )
   }
 }

@@ -6,14 +6,14 @@ export class Hotel {
   name: String;
   description: String;
   address: Address;
-  attachment: Attachment;
   bedRooms: Array<BedRoom>;
+  attachments: Array<Attachment>;
 
   constructor() {
     this.name = "";
     this.description = "";
+    this.attachments = new Array<Attachment>();
     this.bedRooms = new Array<BedRoom>();
     this.address = new Address();
-    this.attachment = new Attachment();
   }
 }

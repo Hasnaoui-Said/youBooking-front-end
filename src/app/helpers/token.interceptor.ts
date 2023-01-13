@@ -28,13 +28,12 @@ export class TokenInterceptor implements HttpInterceptor {
       });
       return next.handle(clone).pipe(
         catchError(err => {
-          console.log(err);
           if (err.status === 403) {
             this._snackBar.open("HttpStatus.Series.CLIENT_ERROR: 403 token has been expired", 'X');
             this.tokenService.clearTokenExpired();
           }
           if (err.status === 0) {
-            this._snackBar.open(`${err.message}`, 'X');
+            this._snackBar.open(`Server is down. Please try again later.`, 'X');
           }
           if (err.status === 401) {
             this._snackBar.open(`HttpStatus.Series.Unauthorized: 401 ${err.message}`, 'X');

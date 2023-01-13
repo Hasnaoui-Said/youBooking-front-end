@@ -1,12 +1,13 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import {Hotel} from "../../../../../models/hotel.model";
 import {TypeOfRoomService} from "../../../../../services/typeBedRoom/type-of-room.service";
 import {CountryService} from "../../../../../services/country/country.service";
 import {CityService} from "../../../../../services/city/city.service";
 import {BedRoom} from "../../../../../models/bed-room.model";
+import {Document} from "../../../../../models/document.modal";
 
 
 @Component({
@@ -32,7 +33,13 @@ export class HotelsAddComponent implements OnInit {
   typeOfBedRoom!: any;
   bedRooms: BedRoom[] = [];
 
+
+  display: FormControl = new FormControl("", Validators.required);
+  file_store: any = [];
+  file_list: any = [];
+
   displayedColumnsBedRoom: string[] = ["price", "name", "numberOfBeds", "typeRoom"];
+
   constructor(private _formBuilder: FormBuilder,
               public dialogRef: MatDialogRef<HotelsAddComponent>,
               public countryService: CountryService,
@@ -49,8 +56,9 @@ export class HotelsAddComponent implements OnInit {
   }
 
   saveHotel() {
+    console.log("saveHotel", this)
     let hotel: Hotel = this.hotel();
-    this.dialogRef.close({result: true, data: hotel})
+    this.dialogRef.close({result: true, data: hotel, file_store: this.file_store})
   }
 
   private hotel() {
@@ -59,11 +67,10 @@ export class HotelsAddComponent implements OnInit {
     return {
       name: hotel.name, description: hotel.description,
       address: {address: hotel.address, street: hotel.street, city: hotel.city, country: hotel.country},
-      attachment: {title: attachment.title, description: attachment.description},
+      attachments: [{title: attachment.title, description: attachment.description, documents: []}],
       bedRooms: this.bedRooms
     }
   }
-
   private formBuilderData() {
     this.hotelFormGroup = this.data.hotelFormGroup;
     this.bedRoomFormGroup = this.data.bedRoomFormGroup;
@@ -108,10 +115,36 @@ export class HotelsAddComponent implements OnInit {
       this.bedRooms.push(room);
       // this.bedRoomFormGroups.get('bedRooms').insert(1,room);
       this.changeDetectorRef.markForCheck();
-    } else{
+    } else {
       console.log("Form has errors");
       console.log(this.bedRoomFormGroup.errors)
     }
     console.log(this.bedRooms.length, this.bedRooms)
   }
+
+  handleFileInputChange(event: any) {
+
+    if (event.target.files && event.target.files.length) {
+
+      for (let i = 0; i < event.target.files.length; i++) {
+        const reader = new FileReader();
+        const file = event.target.files[i];
+        this.file_store.push(file);
+        reader.readAsDataURL(file);
+
+        reader.onload = () => {
+          let url = reader.result as string;
+          this.file_list.push({url: url});
+        };
+      }
+      const f = this.file_store[0];
+      const count = this.file_store.length > 1 ? `(+${this.file_store.length - 1} files)` : "";
+      this.display.patchValue(`${f.name}${count}`);
+
+    } else {
+      this.display.patchValue("");
+    }
+  }
+
+
 }

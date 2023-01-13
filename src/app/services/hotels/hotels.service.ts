@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Hotel} from "../../models/hotel.model";
 
@@ -10,15 +10,20 @@ import {Hotel} from "../../models/hotel.model";
 export class HotelsService {
 
   private sub_url = '/api/v1/hotels';
-  constructor(private http: HttpClient) { }
 
-  get():Observable<any>{
+  constructor(private http: HttpClient) {
+  }
+
+  get(): Observable<any> {
     return this.http.get(`${environment.apiURL + this.sub_url}/principal`);
   }
 
-  saveHotel(hotel: Hotel) {
+  saveHotel(hotel: Hotel):Observable<any> {
     console.log(this)
     console.log(hotel)
-    return this.http.post(`${environment.apiURL + this.sub_url}/save`, hotel);
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    return this.http.post(`${environment.apiURL + this.sub_url}/save`, hotel, {headers: headers});
   }
 }

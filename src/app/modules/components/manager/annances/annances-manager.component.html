@@ -1,1 +1,42 @@
 <p>annances-manager works!</p>
+
+<form (ngSubmit)="uploadProduct()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" [(ngModel)]="product.name" class="form-control" name="name" id="name" required>
+  </div>
+  <div class="form-group">
+    <label for="images">Images</label>
+    <input type="file" multiple (change)="onFileChanged($event)" class="form-control" name="images" id="images" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
+<!--<form (ngSubmit)="saveProductVo()">-->
+<!--  <div>-->
+<!--    <label for="name">Product Name:</label>-->
+<!--    <input type="text" id="name" [(ngModel)]="product.name" name="name" required>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <label for="image">Product Image:</label>-->
+<!--    <input type="file" id="image" (change)="onFileSelected($event)" required>-->
+<!--  </div>-->
+
+<!--  <img width="400" [src]="imageUrl" *ngIf="imageUrl" />-->
+<!--  <button type="submit">Save</button>-->
+<!--</form>-->
+
+<div class="d-flex">
+  <div *ngFor="let product of products">
+    <p>Name: {{ product.name }}</p>
+    <p>Name: {{ product.price }}</p>
+    <div *ngFor="let p of product.images">
+      <img width="300" [src]="'data:image/jpg;base64,' + p.image" alt="product image">
+    </div>
+  </div>
+
+  <!--</div>-->
+
+
+

@@ -61,7 +61,7 @@
       </div>
     </form>
   </mat-step>
-  <mat-step >
+  <mat-step>
     <form [formGroup]="bedRoomFormGroup">
       <ng-template matStepLabel>Bed Room :</ng-template>
       <div class="">
@@ -132,16 +132,16 @@
               </ng-container>
             </table>
 
-<!--            <div fxLayout class="w-100">-->
-<!--              <div fxFlex="40" class="card" *ngFor="let room of bedRooms">-->
-<!--                <div class="card-body">-->
-<!--                  <h5 class="card-title">{{room.name}}</h5>-->
-<!--                  <p class="card-text">Price: {{room.price}}</p>-->
-<!--                  <p class="card-text">Number of beds: {{room.numberOfBeds}}</p>-->
-<!--                  <p class="card-text">Type of room: {{room.typeRoom}}</p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
+            <!--            <div fxLayout class="w-100">-->
+            <!--              <div fxFlex="40" class="card" *ngFor="let room of bedRooms">-->
+            <!--                <div class="card-body">-->
+            <!--                  <h5 class="card-title">{{room.name}}</h5>-->
+            <!--                  <p class="card-text">Price: {{room.price}}</p>-->
+            <!--                  <p class="card-text">Number of beds: {{room.numberOfBeds}}</p>-->
+            <!--                  <p class="card-text">Type of room: {{room.typeRoom}}</p>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
 
           </div>
         </div>
@@ -155,22 +155,46 @@
   <mat-step [stepControl]="attachmentsFormGroup" errorMessage="Attachments is required.">
     <form [formGroup]="attachmentsFormGroup">
       <ng-template matStepLabel>Attachments :</ng-template>
-      <div class="mt-2">
-        <div class="">
-          <div class="form-group">
-            <mat-form-field>
-              <mat-label>Name :</mat-label>
-              <input matInput placeholder="name" formControlName="title"
-                     required>
-            </mat-form-field>
-          </div>
-          <div class="form-group">
-            <mat-form-field>
-              <mat-label>description :</mat-label>
-              <textarea matInput placeholder="description" formControlName="description">
+      <div class="">
+        <div class="mt-2" fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="space-between start">
+          <div fxFlex="30">
+            <div class="form-group">
+              <mat-form-field class="w-100">
+                <mat-label>Name :</mat-label>
+                <input matInput placeholder="name" formControlName="title"
+                       required>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="w-100">
+                <mat-label>description :</mat-label>
+                <textarea matInput placeholder="description" formControlName="description">
 
               </textarea>
-            </mat-form-field>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="w-100">
+                <mat-label>File matInput</mat-label>
+                <button mat-icon-button color="primary" matPrefix (click)="f_input.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <textarea readonly matInput [formControl]="display">
+              </textarea>
+                <input
+                  type="file"
+                  multiple
+                  hidden
+                  #f_input
+                  (change)="handleFileInputChange($event)"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div fxFlex="70" class="" xLayout="row" fxLayoutAlign="space-around center" *ngIf="file_list.length>0">
+            <div *ngFor="let file of file_list" fxLayout="30">
+              <img src="{{file.url}}" width="140" height="140">
+            </div>
           </div>
         </div>
         <div class="text-end mt-2">

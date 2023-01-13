@@ -65,6 +65,7 @@ export class FormGrService {
     let group = this.formGroup.group({
       title: ['', Validators.required],
       description: [''],
+      image: [''],
     });
     return group;
   }
