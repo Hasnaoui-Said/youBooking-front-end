@@ -54,10 +54,11 @@ import { DashboardManagerComponent } from './modules/components/manager/dashboar
 import { AnnancesManagerComponent } from './modules/components/manager/annances/annances-manager.component';
 import { ReservationsComponent } from './modules/components/manager/reservations/reservations.component';
 import { HotelsManagerComponent } from './modules/components/manager/hotels/hotels-manager.component';
-import { HotelsManagerListComponent } from './modules/components/manager/hotels/hotels-list/hotels-manager-list.component';
-import { HotelsAddComponent } from './modules/components/manager/hotels/hotels-add/hotels-add.component';
-import { HotelsEditComponent } from './modules/components/manager/hotels/hotels-edit/hotels-edit.component';
+import { HotelsManagerListComponent } from './modules/components/manager/hotels/list/hotels-manager-list.component';
+import { HotelsAddComponent } from './modules/components/manager/hotels/add/hotels-add.component';
+import { HotelsEditComponent } from './modules/components/manager/hotels/edit/hotels-edit.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import { HotelDetailsComponent } from './modules/components/manager/hotels/details/hotel-details.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import {MatStepperModule} from "@angular/material/stepper";
     HotelsManagerListComponent,
     HotelsAddComponent,
     HotelsEditComponent,
+    HotelDetailsComponent,
   ],
     imports: [
         BrowserModule,

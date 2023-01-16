@@ -11,6 +11,8 @@ export class HotelsManagerListComponent implements OnInit {
   @Input() loadingData: boolean = true;
   @Input() HotelsLength!: number;
   @Output() openAddHotelDialog = new EventEmitter();
+  @Output() detailsHotels = new EventEmitter();
+  columnsToDisplay = ['image','name', 'description','state'];
   constructor() { }
 
   ngOnInit(): void {
@@ -19,4 +21,7 @@ export class HotelsManagerListComponent implements OnInit {
     this.openAddHotelDialog.emit();
   }
 
+  onDetailsHotels(hotel: any) {
+    this.detailsHotels.emit(hotel);
+  }
 }

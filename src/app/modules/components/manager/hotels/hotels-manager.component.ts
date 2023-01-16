@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {HotelsService} from "../../../../services/hotels/hotels.service";
 import {MatDialog} from "@angular/material/dialog";
-import {HotelsAddComponent} from "./hotels-add/hotels-add.component";
+import {HotelsAddComponent} from "./add/hotels-add.component";
 import {FormArray, FormGroup} from "@angular/forms";
 import {FormGrService} from "../../../shared/form-gr.service";
 import {SnackBarService} from "../../../../services/snack-bar.service";
 import {HttpHeaders} from "@angular/common/http";
 import {AttachmentService} from "../../../../services/attachment/attachment.service";
+import {HotelDetailsComponent} from "./details/hotel-details.component";
 
 @Component({
   selector: 'app-hotels-manager',
@@ -59,7 +60,14 @@ export class HotelsManagerComponent implements OnInit {
     });
   }
 
-
+  detailsHotels(event: any){
+    this.dialog.open(HotelDetailsComponent, {
+      width: '30%',
+      data: {
+        hotel: event
+      }
+    });
+  }
   getHotels() {
     this.hotelsService.get().subscribe(
       next => {
