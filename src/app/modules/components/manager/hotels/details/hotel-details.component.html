@@ -1,0 +1,24 @@
+<ng-container>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Dettails</mat-card-title>
+    <mat-card-subtitle><span>Name Hotel: </span> {{hotel.name}}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="my-2">
+    <img mat-card-image class="rounded" width="350" height="450" [src]="'data:image/jpg;base64,' +urlImage" alt="hotel image">
+  </div>
+  <mat-card-content>
+    <div class="my-2" fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let att of hotel.attachments">
+      <div *ngFor="let doc of att.documents; let index = index">
+        <img (click)="imageCurrent(doc.image)" mat-card-image class="rounded border" width="60" height="60"
+             [src]="'data:image/jpg;base64,' +doc.image" alt="hotel image">
+      </div>
+    </div>
+    <p>
+      {{hotel.description}}
+    </p>
+    <div>
+      {{hotel.address.address}}, {{hotel.address.city.name}}, {{hotel.address.city.country.name}}
+    </div>
+  </mat-card-content>
+</ng-container>

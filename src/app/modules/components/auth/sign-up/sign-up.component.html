@@ -1,0 +1,86 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-card class="p-5 mt-5 mb-0">
+    <mat-card-title class="text-center">Se connecter ou créer un compte</mat-card-title>
+    <mat-card-content class="">
+      <mat-error *ngIf="error_message">
+        <div class="alert alert-danger text-center">
+          <div class="text-danger">{{error_message}}</div>
+          <p>{{sub_error_message}}</p>
+        </div>
+      </mat-error>
+      <form [formGroup]="registerFormGroup" (ngSubmit)="submit()" class="m-4">
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Adresse e-mail</mat-label>
+            <input formControlName="email" matInput type="email" required>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>User name</mat-label>
+            <input formControlName="username" matInput type="text" required>
+          </mat-form-field>
+        </div>
+        <div class="w-100 form-group" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="w-100">
+                <mat-label>Nom</mat-label>
+                <input formControlName="lastName" matInput>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="w-100">
+                <mat-label>Prénom</mat-label>
+                <input formControlName="firstName" matInput>
+              </mat-form-field>
+            </td>
+          </tr>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Telephone</mat-label>
+            <span matPrefix>+112 &nbsp;</span>
+            <input formControlName="phone" type="tel" matInput placeholder="642-041-066">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>N° CIN</mat-label>
+            <input formControlName="cin" matInput type="text" required>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" required>
+              <mat-option value="manager">Propriétaire</mat-option>
+              <mat-option value="client">Client</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Mot de passe</mat-label>
+            <input formControlName="password" matInput type="password" required>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Confirmation mot de passe</mat-label>
+            <input formControlName="confirmPassword" matInput type="password" required>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-12 text-center mt-5">
+          <button class="w-100" mat-raised-button color="accent">S'inscrire</button>
+        </div>
+
+        <div class="form-group text-center mt-4">
+          <p>Not a member? <a href="/auth/register">register</a></p>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,20 @@
+<app-heroes></app-heroes>
+
+<app-empty-list *ngIf="loadingData || offersLength == 0; else data"
+                [Image]="'/assets/media/svg/misc/no_data.svg'"
+                [Title]="'No Data From offers Found'"
+                [Description]="'Description'"
+                [heightImage]="'240px'"
+                [buttonState]="false"
+>
+</app-empty-list>
+
+
+<ng-template #data>
+  <app-list-offers
+    [data]="offers"
+    [offersLength]="offersLength"
+    (detailsOffer)="detailsOffer($event)"
+  >
+  </app-list-offers>
+</ng-template>

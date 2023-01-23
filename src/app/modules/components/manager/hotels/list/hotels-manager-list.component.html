@@ -1,0 +1,53 @@
+<ng-container class="mb-5">
+
+  <div class="table-responsive my-5">
+
+    <table mat-table
+           [dataSource]="data" multiTemplateDataRows
+           class="mat-elevation-z8 w-100">
+
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Image</th>
+        <td mat-cell *matCellDef="let hotel">
+          <img role="button" (click)="onDetailsHotels(hotel)" class="m-2" mat-card-avatar
+               [src]="'data:image/jpg;base64,' +hotel.attachments[0].documents[0].image" alt="hotel image">
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let hotel"> {{hotel.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description</th>
+        <td mat-cell *matCellDef="let hotel"> {{hotel.description}} </td>
+      </ng-container>
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef> State</th>
+        <td mat-cell *matCellDef="let hotel">
+          <span
+            class="badge "
+            [ngClass]="{
+            'text-success bg-light-success': hotel.stateHotel === 'OPEN',
+            'text-danger bg-light-danger': hotel.stateHotel === 'CLOSED',
+            'text-warning bg-light-warning': hotel.stateHotel === 'UNDER_DEVELOPMENT'
+          }"
+          >
+          {{hotel.stateHotel}}
+        </span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+
+    </table>
+
+
+    <mat-paginator [pageSize]="5" [length]="HotelsLength"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+
+</ng-container>

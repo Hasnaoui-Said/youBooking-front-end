@@ -1,0 +1,51 @@
+<ng-container class="mb-5">
+
+  <div class="table-responsive my-5">
+
+    <table mat-table
+           [dataSource]="data" multiTemplateDataRows
+           class="mat-elevation-z8 w-100">
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> title</th>
+        <td mat-cell *matCellDef="let annance"> {{annance.title}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description</th>
+        <td mat-cell *matCellDef="let annance"> {{(annance.description + annance.sub_description).substring(0, 50)}}
+          <button mat-button class="text-primary">...more</button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="hotel">
+        <th mat-header-cell *matHeaderCellDef> hotel name</th>
+        <td mat-cell *matCellDef="let annance"> {{annance.hotel.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let a">
+          <span
+            class="badge "
+            [ngClass]="{
+            'text-warning bg-light-warning': a.status === 'PENDING',
+            'text-success bg-light-success': a.status === 'ACCEPTED',
+            'text-danger bg-light-danger': a.status === 'REJECTED'
+          }"
+          >
+          {{a.status}}
+        </span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+
+    </table>
+
+
+    <mat-paginator [pageSize]="5" [length]="annancesLength"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+
+</ng-container>

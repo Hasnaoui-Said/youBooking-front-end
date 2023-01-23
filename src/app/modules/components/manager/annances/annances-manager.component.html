@@ -1,0 +1,48 @@
+<app-empty-list *ngIf="loadingData || annancesLength == 0; else data"
+                [Image]="'../../../../assets/media/svg/misc/no_data.svg'"
+                [Title]="'No Data From Annances Found'"
+                [Description]="'Description'"
+                [LabelButton]="'Add New Annance'"
+                [heightImage]="'240px'"
+                (ButtonClickEvent)="openAddAnnanceDialog()"
+>
+</app-empty-list>
+
+<ng-template #data>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div class="w-100" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="text-start">
+          <mat-card-title>Annances</mat-card-title>
+          <mat-card-subtitle>List Of Annances</mat-card-subtitle>
+        </div>
+        <div class="text-end">
+          <app-button
+            [LabelButton]="'Add New'"
+            (click)="openAddAnnanceDialog()"
+            [style]="'m-2 p-2'"
+            [color]="'primary'"
+          >
+          </app-button>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <app-list-annances-manager
+          [data]="annances"
+          [annancesLength]="annancesLength"
+          [loadingData]="loadingData"
+          (openAddAnnanceDialog)="openAddAnnanceDialog()"
+          (details)="detailsAnnance($event)"
+        >
+        </app-list-annances-manager>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+
+
+
+
