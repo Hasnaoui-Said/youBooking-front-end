@@ -52,7 +52,8 @@ export class UsersAdminComponent implements OnInit {
       data: {
         title: 'Update user',
         message: 'Are you sure you want to change state of this user? ' + $event.uuid,
-        state: $event.state
+        state: $event.state,
+        confirmRef: 'users'
       }
     });
 

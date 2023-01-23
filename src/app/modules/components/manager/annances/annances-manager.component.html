@@ -1,42 +1,48 @@
-<p>annances-manager works!</p>
+<app-empty-list *ngIf="loadingData || annancesLength == 0; else data"
+                [Image]="'../../../../assets/media/svg/misc/no_data.svg'"
+                [Title]="'No Data From Annances Found'"
+                [Description]="'Description'"
+                [LabelButton]="'Add New Annance'"
+                [heightImage]="'240px'"
+                (ButtonClickEvent)="openAddAnnanceDialog()"
+>
+</app-empty-list>
 
-<form (ngSubmit)="uploadProduct()">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" [(ngModel)]="product.name" class="form-control" name="name" id="name" required>
-  </div>
-  <div class="form-group">
-    <label for="images">Images</label>
-    <input type="file" multiple (change)="onFileChanged($event)" class="form-control" name="images" id="images" required>
-  </div>
-  <button type="submit" class="btn btn-primary">Save</button>
-</form>
+<ng-template #data>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div class="w-100" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="text-start">
+          <mat-card-title>Annances</mat-card-title>
+          <mat-card-subtitle>List Of Annances</mat-card-subtitle>
+        </div>
+        <div class="text-end">
+          <app-button
+            [LabelButton]="'Add New'"
+            (click)="openAddAnnanceDialog()"
+            [style]="'m-2 p-2'"
+            [color]="'primary'"
+          >
+          </app-button>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <app-list-annances-manager
+          [data]="annances"
+          [annancesLength]="annancesLength"
+          [loadingData]="loadingData"
+          (openAddAnnanceDialog)="openAddAnnanceDialog()"
+          (details)="detailsAnnance($event)"
+        >
+        </app-list-annances-manager>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
 
 
-<!--<form (ngSubmit)="saveProductVo()">-->
-<!--  <div>-->
-<!--    <label for="name">Product Name:</label>-->
-<!--    <input type="text" id="name" [(ngModel)]="product.name" name="name" required>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <label for="image">Product Image:</label>-->
-<!--    <input type="file" id="image" (change)="onFileSelected($event)" required>-->
-<!--  </div>-->
-
-<!--  <img width="400" [src]="imageUrl" *ngIf="imageUrl" />-->
-<!--  <button type="submit">Save</button>-->
-<!--</form>-->
-
-<div class="d-flex">
-  <div *ngFor="let product of products">
-    <p>Name: {{ product.name }}</p>
-    <p>Name: {{ product.price }}</p>
-    <div *ngFor="let p of product.images">
-      <img width="300" [src]="'data:image/jpg;base64,' + p.image" alt="product image">
-    </div>
-  </div>
-
-  <!--</div>-->
 
 
 

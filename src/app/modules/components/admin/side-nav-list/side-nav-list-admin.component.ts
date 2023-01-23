@@ -6,8 +6,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./side-nav-list-admin.component.scss']
 })
 export class SideNavListAdminComponent implements OnInit {
-  @Output() sidenavClose = new EventEmitter
-  ();
+  @Output() sidenavClose = new EventEmitter();
   @Output() changeMode = new EventEmitter();
   @Output() changeLang = new EventEmitter();
   @Input() lang: String = '';

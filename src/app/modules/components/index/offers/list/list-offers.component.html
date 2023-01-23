@@ -1,0 +1,38 @@
+<ng-container>
+  <div class="offers" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30">
+    <div class="card-wrapper" *ngFor="let offer of data" style="width: 50%">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <img
+            [src]="'data:image/jpg;base64,' +offer.hotel.attachments[0].documents[0].image" alt="logo" mat-card-avatar/>
+          <mat-card-title><span role="button" (click)="onClickDetailsOffer(offer.uuid)">{{offer.title}}</span></mat-card-title>
+          <mat-card-subtitle>
+            {{offer.hotel.address.address}}, {{offer.hotel.address.city.name}}
+            , {{offer.hotel.address.city.country.name}}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-grid-list cols="1" rowHeight="250px">
+            <mat-grid-tile>
+              <img role="button" class="rounded-2" (click)="viewImage(offer.hotel.attachments[0].documents[0].image)"
+                   [src]="'data:image/jpg;base64,' +offer.hotel.attachments[0].documents[0].image" width="300"
+                   height="300" alt="hotel image">
+              <div class="ms-5">
+                <p class="">{{offer.description + offer.sub_description}}</p>
+                <div class="text-end">
+                <button mat-raised-button color="accent" (click)="onClickDetailsOffer(offer.uuid)">Découvrez les offers</button>
+                </div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+
+        <!--        <mat-card-actions class="text-end">-->
+        <!--        </mat-card-actions>-->
+      </mat-card>
+
+    </div>
+
+
+  </div>
+</ng-container>

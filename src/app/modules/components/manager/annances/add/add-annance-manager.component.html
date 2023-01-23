@@ -1,0 +1,29 @@
+<form [formGroup]="formControl" (ngSubmit)="onSubmit()" class="p-2">
+  <div class="form-group">
+    <mat-form-field class="w-100">
+      <mat-label>Name :</mat-label>
+      <input matInput formControlName="title" required>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field class="w-100">
+      <mat-label>Hotel:</mat-label>
+      <mat-select formControlName="hotel" placeholder="Hotel" required>
+        <mat-option disabled>--Select Options--</mat-option>
+        <mat-option *ngFor="let h of hotels" [value]="h.uuid">{{h.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field class="w-100">
+      <mat-label>description : </mat-label>
+      <textarea matInput maxlength="500" placeholder="description" formControlName="description">
+      </textarea>
+      <mat-hint align="end" class="me-2"> {{formControl.value.description.length}}/ 500 </mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="text-end mt-5">
+    <button mat-button type="button" (click)="_dialogRef.close({result: false, data: null})">Cancel</button>
+    <button mat-button type="submit" [disabled]="!formControl.valid">Save</button>
+  </div>
+</form>

@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {AnnanceService} from "../../../../services/annance/annance.service";
+import {SnackBarService} from "../../../../services/snack-bar.service";
+import {MatDialog} from "@angular/material/dialog";
+import {FormGrService} from "../../../shared/form-gr.service";
+import {AddAnnanceManagerComponent} from "./add/add-annance-manager.component";
+import {HotelsService} from "../../../../services/hotels/hotels.service";
 
 @Component({
   selector: 'app-annances-manager',
@@ -8,59 +12,90 @@ import {Observable} from "rxjs";
   styleUrls: ['./annances-manager.component.scss']
 })
 export class AnnancesManagerComponent implements OnInit {
-  products: any;
 
-  product2 = {name: '', images: []};
-  selectedFiles: any;
-  private image: File | undefined;
+  annances!: Array<Object>;
+  annancesLength: number = 0;
+  loadingData: boolean = true;
+  private hotels: Array<Object> = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private annanceService: AnnanceService,
+              private formGrService: FormGrService,
+              private hotelService: HotelsService,
+              private _snackBar: SnackBarService,
+              public _dialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {
-    this.getProducts()
+    this.getAnnances();
   }
 
-  product = {name: '', image: null};
-
-  onFileChanged(event: any) {
-    this.selectedFiles = event.target.files;
-  }
-
-  public uploadProduct(): void {
-    let formData = new FormData();
-    formData.append('name', this.product.name);
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      formData.append('images', this.selectedFiles[i]);
-    }
-
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'multipart/form-data');
-    headers.append('Accept', 'application/json');
-
-    this.http.post('http://localhost:9090/api/v1/product/save', formData, {headers: headers}).subscribe(
-      (response) => {
-        console.log("Product created successfully");
-        //@ts-ignore
-        this.products = response.data;
-      },
-      (error) => {
-        console.log("Error creating product: " + error);
+  getAnnances() {
+    this.annanceService.getAllPrincipale().subscribe(
+      next => {
+        this.annances = next.data;
+        this.loadingData = false;
+        this.annancesLength = this.annances.length;
+      }, error => {
+        console.error(error.message)
+        this._snackBar.open(error.message, 'X');
       }
-    );
+    )
   }
 
-  getProducts() {
-    this.getAll().subscribe(response => {
-      this.products = response.data;
-      console.log(response)
-    }, error => {
-      console.error(error)
+  async openAddAnnanceDialog() {
+    try {
+      await this.getHotels();
+    } catch (error) {
+      // @ts-ignore
+      this._snackBar.open(error.status, 'X');
+      return;
+    }
+    if (this.hotels.length == 0) {
+      this._snackBar.open("Hotels array is empty", 'X');
+      return;
+    }
+    const dialogRef = this._dialog.open(AddAnnanceManagerComponent, {
+      disableClose: true,
+      width: '30%',
+      data: {
+        formControl: this.formGrService.annanceFormGroup(),
+        hotels: this.hotels,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(e => {
+      // console.log("afterClosed")
+      // console.log(e)
+      if (e.result != false) {
+        this.annanceService.save(e.data).subscribe(
+          next => {
+            console.log(next)
+            this.annancesLength += 1;
+            console.log(next.data)
+            this.annances.push(next.data);
+          }, error => {
+            console.error(error)
+            this._snackBar.open(error.error.message, 'X');
+          }
+        )
+      }
     });
   }
 
-  private getAll(): Observable<any> {
-    let url = 'http://localhost:9090/api/v1/product/';
-    return this.http.get(url);
+
+  private async getHotels(): Promise<any> {
+    console.log("getHotels")
+    try {
+      const response = await this.hotelService.getPrincipal().toPromise();
+      this.hotels = response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  detailsAnnance($event: any) {
+    console.log("open details annanc");
   }
 }

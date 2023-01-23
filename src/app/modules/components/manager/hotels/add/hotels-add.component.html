@@ -13,7 +13,7 @@
           <div class="form-group">
             <mat-form-field>
               <mat-label>Description</mat-label>
-              <textarea matInput placeholder="description" formControlName="description">
+              <textarea maxlength="255" matInput placeholder="description" formControlName="description">
               </textarea>
             </mat-form-field>
           </div>
@@ -100,8 +100,7 @@
             <div class="form-group">
               <button mat-button [disabled]="bedRoomFormGroup.pristine" (click)="bedRoomFormGroup.reset()">Clear
               </button>
-              <button mat-button color="primary" [disabled]="!bedRoomFormGroup.valid" (click)="addBedRoom()">Save
-              </button>
+              <button mat-button color="primary" [disabled]="!bedRoomFormGroup.valid" (click)="addBedRoom()">Save</button>
             </div>
           </div>
           <div fxFlex="60" class="w-100" *ngIf="bedRooms.length>0">

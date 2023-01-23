@@ -1,8 +1,8 @@
-<ng-container *ngTemplateOutlet="ButtonRef">
+<ng-container *ngTemplateOutlet="emptyRef">
 </ng-container>
 
-<ng-template #ButtonRef>
-  <div class="card" style="height: auto">
+<ng-template #emptyRef>
+  <div class="card mx-5" style="height: auto">
     <div class="card-body py-5">
       <div class="card-px text-center py-5 my-2 pb-12">
         <h2 class="fs-2x fw-bolder mb-10">{{ Title }}</h2>
@@ -10,13 +10,15 @@
           class="text-gray-400 fs-4 fw-bold mb-10"
           [innerHTML]="Description"
         ></p>
-        <app-button
-          [LabelButton]="LabelButton"
-          (click)="onButtonClick($event)"
-          [style]="'m-2 p-2'"
-          [color]="'primary'"
-        >
-        </app-button>
+        <div *ngIf="buttonState">
+          <app-button
+            [LabelButton]="LabelButton"
+            (click)="onButtonClick($event)"
+            [style]="'m-2'"
+            [color]="'primary'"
+          >
+          </app-button>
+        </div>
       </div>
       <div class="text-center px-4">
         <img

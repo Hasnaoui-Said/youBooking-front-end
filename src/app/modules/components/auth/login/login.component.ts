@@ -29,9 +29,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.userFormGroup.value.username, this.userFormGroup.value.password)
       .subscribe(
         res => {
-          console.log(res)
-          console.log(res.statusCodeValue)
-          console.log(res.body.data)
           if (res.statusCodeValue === 200) {
             // Save the token
             this.tokenService.saveTokenRefresh(res.body.data.refreshJeton);

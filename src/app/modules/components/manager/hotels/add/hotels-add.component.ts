@@ -8,6 +8,7 @@ import {CountryService} from "../../../../../services/country/country.service";
 import {CityService} from "../../../../../services/city/city.service";
 import {BedRoom} from "../../../../../models/bed-room.model";
 import {Document} from "../../../../../models/document.modal";
+import {BehaviorSubject} from "rxjs";
 
 
 @Component({
@@ -32,6 +33,8 @@ export class HotelsAddComponent implements OnInit {
   country!: any;
   typeOfBedRoom!: any;
   bedRooms: BedRoom[] = [];
+  bedRoomSubject = new BehaviorSubject<any>(this.bedRooms);
+  bedRoomObject = this.bedRoomSubject.asObservable();
 
 
   display: FormControl = new FormControl("", Validators.required);
@@ -113,6 +116,7 @@ export class HotelsAddComponent implements OnInit {
         typeRoom: bedRoom.typeOfRoom
       };
       this.bedRooms.push(room);
+      this.bedRoomSubject.next(this.bedRooms);
       // this.bedRoomFormGroups.get('bedRooms').insert(1,room);
       this.changeDetectorRef.markForCheck();
     } else {

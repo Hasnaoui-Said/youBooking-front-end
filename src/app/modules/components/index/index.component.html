@@ -1,0 +1,23 @@
+<div class="">
+  <mat-sidenav-container>
+    <mat-sidenav-content>
+      <app-header-index
+        (changeMode)="onChangeMode($event)"
+        (changeLang)="changeLang($event)"
+        [lang]="lang"
+        [mode]="mode"
+      >
+      </app-header-index>
+      <main class="" fxLayout="column">
+
+        <router-outlet></router-outlet>
+
+      </main>
+      <footer class="footer">
+        <mat-toolbar fxLayout="column" fxLayoutAlign="center center">
+          <app-footer-admin></app-footer-admin>
+        </mat-toolbar>
+      </footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

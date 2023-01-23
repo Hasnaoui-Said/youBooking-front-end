@@ -3,6 +3,6 @@
 
 
 <ng-template #ButtonRef>
-<button mat-button mat-flat-button color="{{color}}"
+<button [class]="style" mat-button mat-flat-button color="{{color}}" [disabled]="disabled"
         (click)="onButtonClick()">{{LabelButton}}</button>
 </ng-template>

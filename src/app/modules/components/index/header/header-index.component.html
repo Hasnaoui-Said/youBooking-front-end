@@ -1,0 +1,58 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayoutAlign="start center">
+    <div>
+      <a class="text-white nav-item nav-link" href="/">next.youBooking</a>
+    </div>
+  </div>
+<!--  <div fxHide.lt-md class="mat-elevation-z4" fxFlex="40">-->
+<!--    <mat-nav-list fxLayout="row" fxLayoutAlign="center">-->
+<!--      <a fxLayout="row" fxLayoutAlign="center" class="text-white" mat-list-item routerLink="/">Home</a>-->
+<!--      <a fxLayout="row" fxLayoutAlign="center" class="text-white" mat-list-item routerLink="/index/reservations">Reservations</a>-->
+<!--      <a fxLayout="row" fxLayoutAlign="center" class="text-white" mat-list-item routerLink="/profile">Profile</a>-->
+<!--    </mat-nav-list>-->
+<!--  </div>-->
+
+  <div fxLayout fxLayoutAlign="end">
+    <ul fxLayoutAlign="space-around center" fxLayoutGap="5px" class="navigation-items">
+
+      <li>
+        <a routerLink="/auth/register" routerLinkActive="active">
+          <button mat-button class="text-white">Se connecter</button>
+        </a>
+      </li>
+      <div ngbDropdown class="d-inline-block">
+        <button mat-stroked-button id="dropdownLang" class="bg-white text-dark" ngbDropdownToggle>
+          <span color="primary">{{language.name}}</span>
+          <img
+            class="rounded"
+            [ngClass]="language.lang === 'fr' ? 'mx-1' : 'mx-2'"
+            style="width: 18px; height: 18px"
+            src="{{ language.flag }}"
+            alt="language"
+          />
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownLang">
+          <div class="nav-item nav-link" *ngFor="let l of langs">
+            <div xFlex fxLayout fxLayoutAlign="space-around center"
+                 class="mx-0 my-2"
+                 style="cursor: pointer"
+                 (click)="onChangeLang(l.lang)">
+              <span>{{l.name}}</span>
+              <img
+                class="rounded"
+                style="width: 25px; height: 25px"
+                [src]="l.flag"
+                alt="language">
+            </div>
+          </div>
+        </div>
+      </div>
+      <li>
+        <button mat-button class="text-white" (change)="onChangeMode()">
+          <mat-icon>{{mode}}_mode</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>
+

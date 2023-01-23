@@ -14,7 +14,7 @@ export class HotelsService {
   constructor(private http: HttpClient) {
   }
 
-  get(): Observable<any> {
+  getPrincipal(): Observable<any> {
     return this.http.get(`${environment.apiURL + this.sub_url}/principal`);
   }
 

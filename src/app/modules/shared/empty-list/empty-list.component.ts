@@ -9,6 +9,8 @@ export class EmptyListComponent implements OnInit {
 
   @Input() Title: any;
   @Input() Description: any;
+  @Input() disabled: boolean = false;
+  @Input() buttonState: boolean = true;
   @Input() LabelButton: any;
   @Input() Image = '';
 

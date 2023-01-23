@@ -69,4 +69,13 @@ export class FormGrService {
     });
     return group;
   }
+
+  annanceFormGroup() {
+    let group = this.formGroup.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      hotel: ['', Validators.required],
+    });
+    return group;
+  }
 }

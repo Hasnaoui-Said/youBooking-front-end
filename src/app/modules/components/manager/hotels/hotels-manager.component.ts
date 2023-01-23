@@ -2,10 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HotelsService} from "../../../../services/hotels/hotels.service";
 import {MatDialog} from "@angular/material/dialog";
 import {HotelsAddComponent} from "./add/hotels-add.component";
-import {FormArray, FormGroup} from "@angular/forms";
 import {FormGrService} from "../../../shared/form-gr.service";
 import {SnackBarService} from "../../../../services/snack-bar.service";
-import {HttpHeaders} from "@angular/common/http";
 import {AttachmentService} from "../../../../services/attachment/attachment.service";
 import {HotelDetailsComponent} from "./details/hotel-details.component";
 
@@ -15,7 +13,7 @@ import {HotelDetailsComponent} from "./details/hotel-details.component";
   styleUrls: ['./hotels-manager.component.scss']
 })
 export class HotelsManagerComponent implements OnInit {
-  hotels: any;
+  hotels!: Array<Object>;
   hotelsLength: number = 0;
   loadingData: boolean = true;
 
@@ -49,7 +47,7 @@ export class HotelsManagerComponent implements OnInit {
           next => {
             console.log(next)
             this.saveAttachment(next.data.attachments[0].uuid, e.file_store);
-            this.hotels.add(next.data);
+            this.hotels.push(next.data);
             this.hotelsLength += 1;
           }, error => {
             console.error(error)
@@ -69,7 +67,7 @@ export class HotelsManagerComponent implements OnInit {
     });
   }
   getHotels() {
-    this.hotelsService.get().subscribe(
+    this.hotelsService.getPrincipal().subscribe(
       next => {
         this.hotelsLength = next.data.length;
         this.hotels = next.data;
@@ -89,7 +87,7 @@ export class HotelsManagerComponent implements OnInit {
         console.log(response)
         this.hotels.forEach((hotel: any)=>{
           if (hotel.attachments[0].uuid == uuid){
-            hotel.attachments.add(response.data);
+            hotel.attachments.push(response.data);
           }
         })
       }, errors => {
